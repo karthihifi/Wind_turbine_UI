@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  height: "100vh";
+  background-color: rgb(245, 245, 245);
+  width:100%;
+  font-family: 'EB Garamond';
 }
 
 .App-logo {
@@ -35,4 +39,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App_carousel{
+  max-height: 300px;
+}
+
+img{
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.App_Container{
+  height: 100%;
+  margin: 20px 0
 }
