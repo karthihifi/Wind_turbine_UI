@@ -10,11 +10,17 @@ import PredResults from "./components/predresults";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Wind_model from "./model/Model";
+import { ai_results_intf } from "./model/interface";
 import Paper from "@mui/material/Paper";
-import Footer from './components/footer'
+import Footer from "./components/footer";
 
 function App() {
   let Wind_ref = new Wind_model();
+
+  const [predData, setpredData] = React.useState<ai_results_intf>(
+    Wind_ref.pred_results
+  );
+
   return (
     <div className="App">
       <div className="App_carousel">
@@ -24,12 +30,18 @@ function App() {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Paper elevation={3} sx={{ minHeight: "400px", width: "100%" }}>
-              <InputReadings Wind_ref={Wind_ref}></InputReadings>
+              <InputReadings
+                setpredData={setpredData}
+                Wind_ref={Wind_ref}
+              ></InputReadings>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper elevation={3} sx={{ minHeight: "400px", width: "100%" }}>
-              <PredResults Wind_ref={Wind_ref}></PredResults>
+              <PredResults
+                predData={predData}
+                Wind_ref={Wind_ref}
+              ></PredResults>
             </Paper>
           </Grid>
         </Grid>

@@ -1,9 +1,10 @@
-import { Carousel, Wind_reading_intf } from "./interface";
+import { Carousel, Wind_reading_intf, ai_results_intf } from "./interface";
 import axios from "axios";
 
 class Wind_model {
   Carousel: Carousel[];
   turbine_readings: Wind_reading_intf;
+  pred_results: ai_results_intf;
 
   constructor() {
     this.turbine_readings = {
@@ -15,6 +16,16 @@ class Wind_model {
       h: 0,
       l: 0,
       m: 0,
+    };
+
+    this.pred_results = {
+      target_fail: 0,
+      no_failure: 0,
+      heat_diss_fail: 0,
+      overstrain_fail: 0,
+      power_fail: 0,
+      tool_wear_fail: 0,
+      rand_fail: 0,
     };
     this.Carousel = [
       {
@@ -41,7 +52,16 @@ class Wind_model {
     };
   }
 
-  GetAI_Failure_readings() {
+  GetAI_Failure_readings(): ai_results_intf {
+    let pred_data: ai_results_intf = {
+      target_fail: 0,
+      no_failure: 0,
+      heat_diss_fail: 0,
+      overstrain_fail: 0,
+      power_fail: 0,
+      tool_wear_fail: 0,
+      rand_fail: 0,
+    };
     const data = {
       "Air temperature [K]": this.turbine_readings.air_temp,
       "Process temperature [K]": this.turbine_readings.process_temp,
@@ -58,7 +78,7 @@ class Wind_model {
       password: "75488547As!",
     };
     const baseURL =
-      "https://vsystem.ingress.dh-t4ss62ru9808.di-xmj.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/59579020-61d1-4771-81ae-979f12519a58/v1/uploadjson/";
+      "https://http-cors-proxy.p.rapidapi.com/https://vsystem.ingress.dh-t4ss62ru9808.di-xmj.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/a851da9e-4eef-4ab9-bf3d-a5f18786d9f8/v1/uploadjson/";
 
     const options = {
       method: "POST",
@@ -76,11 +96,25 @@ class Wind_model {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        let StringData = JSON.stringify(response.data.Prediction);
+        console.log(StringData.replace(/\s/g, "").replace(/'/g, ''));
+        let JsonData = JSON.parse(StringData.replace(/\s/g, ""));
+        console.log(Object.values(JsonData));
+        pred_data.heat_diss_fail = JsonData["Heat Dissipation Failure"];
+        pred_data.no_failure = JsonData["NoFailure"];
+        pred_data.target_fail = JsonData["Target Failure"];
+        pred_data.overstrain_fail = JsonData["Overstrain Failure"];
+        pred_data.power_fail = JsonData["Power Failure"];
+        pred_data.tool_wear_fail = JsonData["Tool Wear Failure"];
+        pred_data.rand_fail = JsonData["Random Failures"];
+        console.log(JsonData, pred_data, JsonData["No Failure"]);
       })
       .catch(function (error) {
         console.error(error);
       });
+
+    this.pred_results = pred_data;
+    return pred_data;
   }
 }
 

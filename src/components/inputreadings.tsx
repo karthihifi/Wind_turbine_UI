@@ -7,10 +7,11 @@ import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Typography from "@mui/material/Typography";
 import Wind_model from "../model/Model";
-import { Wind_reading_intf } from "../model/interface";
+import { Wind_reading_intf, ai_results_intf } from "../model/interface";
 
 interface Inputreadings {
   Wind_ref: Wind_model;
+  setpredData: (predData: ai_results_intf) => void;
 }
 
 const InputReadings: React.FC<Inputreadings> = (props) => {
@@ -27,6 +28,7 @@ const InputReadings: React.FC<Inputreadings> = (props) => {
       };
       console.log(Winddata);
       setexpData(Winddata);
+      props.Wind_ref.SetWind_turbine_readings(Winddata);
     };
 
   return (
@@ -40,7 +42,7 @@ const InputReadings: React.FC<Inputreadings> = (props) => {
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch" },
-          padding: "20px"
+          padding: "20px",
         }}
         noValidate
         autoComplete="off"
@@ -173,7 +175,16 @@ const InputReadings: React.FC<Inputreadings> = (props) => {
           />
         </Stack>
       </Box>
-      <Button size="small" variant="contained">
+      <Button
+        size="small"
+        variant="contained"
+        onClick={() => {
+          //   console.log(props.Wind_ref.GetAI_Failure_readings(),"adada");
+        //   props.setpredData(props.Wind_ref.GetAI_Failure_readings());
+        props.Wind_ref.GetAI_Failure_readings()
+          console.log( "Later");
+        }}
+      >
         Submit
       </Button>
     </div>

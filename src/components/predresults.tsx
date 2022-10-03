@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Wind_model from "../model/Model";
+import { ai_results_intf } from "../model/interface";
 import Grid from "@mui/material/Grid";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
@@ -16,6 +17,7 @@ import ShuffleIcon from "@mui/icons-material/Shuffle";
 
 interface PredResult {
   Wind_ref: Wind_model;
+  predData: ai_results_intf;
 }
 
 const PredResults: React.FC<PredResult> = (props) => {
@@ -36,7 +38,7 @@ const PredResults: React.FC<PredResult> = (props) => {
                     <Stack
                       direction="row"
                       spacing={2}
-                      sx={{ minWidth: "250px" }}
+                      sx={{ minWidth: "250px", fontSize: "1.5rem" }}
                     >
                       <CrisisAlertIcon color="primary"></CrisisAlertIcon>
                       <Typography variant="subtitle2" gutterBottom>
@@ -59,7 +61,7 @@ const PredResults: React.FC<PredResult> = (props) => {
                       </Typography>
                     </Stack>
                     <Typography variant="subtitle2" gutterBottom>
-                      0.0
+                      {props.predData.no_failure}
                     </Typography>
                   </Stack>
                   <Stack direction="row" spacing={2}>

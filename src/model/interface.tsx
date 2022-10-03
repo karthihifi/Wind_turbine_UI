@@ -13,3 +13,13 @@ export interface Wind_reading_intf {
   l: number;
   m: number;
 }
+
+export interface ai_results_intf {
+  target_fail: number;
+  no_failure: number;
+  heat_diss_fail: number;
+  overstrain_fail: number;
+  power_fail: number;
+  tool_wear_fail: number;
+  rand_fail: number;
+}
