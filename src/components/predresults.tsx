@@ -14,6 +14,7 @@ import MicrowaveIcon from "@mui/icons-material/Microwave";
 import BoltIcon from "@mui/icons-material/Bolt";
 import BuildIcon from "@mui/icons-material/Build";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
+import "../App.css";
 
 interface PredResult {
   Wind_ref: Wind_model;
@@ -28,145 +29,99 @@ const PredResults: React.FC<PredResult> = (props) => {
           AI Detetction
         </Typography>
       </Box>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%" }} className="test">
         <Stack spacing={2}>
           <Box sx={{ padding: "20px", textAlign: "left" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <Box>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px", fontSize: "1.5rem" }}
-                    >
-                      <CrisisAlertIcon color="primary"></CrisisAlertIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Target Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <AcUnitIcon color="primary"></AcUnitIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        No Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      {props.predData.no_failure}
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <LocalFireDepartmentIcon color="primary"></LocalFireDepartmentIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Heat Dissipation Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <MicrowaveIcon color="primary"></MicrowaveIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Overstrain Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <BoltIcon color="primary"></BoltIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Power Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <BuildIcon color="primary"></BuildIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Tool Wear Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" spacing={2}>
-                    <Stack
-                      direction="row"
-                      spacing={2}
-                      sx={{ minWidth: "250px" }}
-                    >
-                      <ShuffleIcon color="primary"></ShuffleIcon>
-                      <Typography variant="subtitle2" gutterBottom>
-                        Random Failure
-                      </Typography>
-                    </Stack>
-                    <Typography variant="subtitle2" gutterBottom>
-                      0.0
-                    </Typography>
-                  </Stack>
-                </Box>
-              </Grid>
-              <Grid item xs={8}>
-                <Box>
-                  {/* <Typography variant="subtitle2" gutterBottom>
-                    0.0
+            <Box className="test1">
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <CrisisAlertIcon
+                    color="primary"
+                    fontSize="large"
+                  ></CrisisAlertIcon>
+                  <Typography
+                    sx={{ fontSize: "2.5ch" }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Target Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    1.0
+                </Stack>
+                <Typography
+                  variant="subtitle2"
+                  gutterBottom
+                  sx={{ fontSize: "2.5ch" }}
+                >
+                  {props.predData.target_fail}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <AcUnitIcon color="primary" fontSize="large"></AcUnitIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    No Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    0.0
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.no_failure}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <LocalFireDepartmentIcon color="primary" fontSize="large"></LocalFireDepartmentIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    Heat Dissipation Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    0.0
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.heat_diss_fail}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <MicrowaveIcon color="primary" fontSize="large"></MicrowaveIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    Overstrain Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    0.0
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.overstrain_fail}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <BoltIcon color="primary" fontSize="large"></BoltIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    Power Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    0.0
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.power_fail}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <BuildIcon color="primary" fontSize="large"></BuildIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    Tool Wear Failure
                   </Typography>
-                  <Typography variant="subtitle2" gutterBottom>
-                    0.0
-                  </Typography> */}
-                </Box>
-              </Grid>
-            </Grid>
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.tool_wear_fail}
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ minWidth: "300px" }}>
+                  <ShuffleIcon color="primary" fontSize="large"></ShuffleIcon>
+                  <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                    Random Failure
+                  </Typography>
+                </Stack>
+                <Typography variant="subtitle2" gutterBottom sx={{ fontSize: "2.5ch" }}>
+                  {props.predData.rand_fail}
+                </Typography>
+              </Stack>
+            </Box>
           </Box>
         </Stack>
       </Box>

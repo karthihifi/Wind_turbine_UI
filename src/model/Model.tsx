@@ -29,7 +29,7 @@ class Wind_model {
     };
     this.Carousel = [
       {
-        img: "https://media.istockphoto.com/photos/aerial-view-of-wind-turbines-and-agriculture-field-picture-id1224819928?k=20&m=1224819928&s=612x612&w=0&h=EbxcCUjNM7apCtHGoadRFemtHyGlQhQsNVHxVm_VfXg=",
+        img: "https://www.power-technology.com/wp-content/uploads/sites/21/2018/10/Image-1-Fosen-Vind-Wind-Power-Project.jpg",
         context: "test",
       },
       {
@@ -52,7 +52,11 @@ class Wind_model {
     };
   }
 
-  GetAI_Failure_readings(): ai_results_intf {
+  //   one = new Promise((resolve, reject) => {
+  //     resolve("abc");
+  //   });
+
+  GetAI_Failure_readings = (): ai_results_intf => {
     let pred_data: ai_results_intf = {
       target_fail: 0,
       no_failure: 0,
@@ -78,7 +82,7 @@ class Wind_model {
       password: "75488547As!",
     };
     const baseURL =
-      "https://http-cors-proxy.p.rapidapi.com/https://vsystem.ingress.dh-t4ss62ru9808.di-xmj.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/a851da9e-4eef-4ab9-bf3d-a5f18786d9f8/v1/uploadjson/";
+      "https://http-cors-proxy.p.rapidapi.com/https://vsystem.ingress.dh-t4ss62ru9808.di-xmj.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/04e4a20d-92c6-4780-a01a-0cf096a9aaee/v1/uploadjson/";
 
     const options = {
       method: "POST",
@@ -96,18 +100,15 @@ class Wind_model {
     axios
       .request(options)
       .then(function (response) {
-        let StringData = JSON.stringify(response.data.Prediction);
-        console.log(StringData.replace(/\s/g, "").replace(/'/g, ''));
-        let JsonData = JSON.parse(StringData.replace(/\s/g, ""));
-        console.log(Object.values(JsonData));
-        pred_data.heat_diss_fail = JsonData["Heat Dissipation Failure"];
-        pred_data.no_failure = JsonData["NoFailure"];
-        pred_data.target_fail = JsonData["Target Failure"];
-        pred_data.overstrain_fail = JsonData["Overstrain Failure"];
-        pred_data.power_fail = JsonData["Power Failure"];
-        pred_data.tool_wear_fail = JsonData["Tool Wear Failure"];
-        pred_data.rand_fail = JsonData["Random Failures"];
-        console.log(JsonData, pred_data, JsonData["No Failure"]);
+        // console.log(response.data);
+        pred_data.heat_diss_fail = response.data["Heat Dissipation Failure"];
+        pred_data.no_failure = response.data["No_Failure"];
+        pred_data.target_fail = response.data["Target_Failure"];
+        pred_data.overstrain_fail = response.data["Overstrain_Failure"];
+        pred_data.power_fail = response.data["Power_Failure"];
+        pred_data.tool_wear_fail = response.data["Tool_Wear_Failure"];
+        pred_data.rand_fail = response.data["Random_Failures"];
+        console.log(pred_data, "PredData");
       })
       .catch(function (error) {
         console.error(error);
@@ -115,7 +116,7 @@ class Wind_model {
 
     this.pred_results = pred_data;
     return pred_data;
-  }
+  };
 }
 
 export default Wind_model;
